@@ -15,11 +15,11 @@ const Product = db.define('Product', {
   },
   slogan: {
     type: DataTypes.TEXT,
-    allowNull: true
+    allowNull: false
   },
   description: {
     type: DataTypes.TEXT,
-    allowNull: true
+    allowNull: false
   },
   category: {
     type: DataTypes.STRING(100),
@@ -46,27 +46,27 @@ const Question = db.define('Question', {
   },
   body: {
     type: DataTypes.TEXT,
-    allowNull: true
+    allowNull: false
   },
   date_written: {
     type: DataTypes.BIGINT,
-    allowNull: true
+    allowNull: false,
   },
   asker_name: {
     type: DataTypes.STRING(50),
-    allowNull: true
+    allowNull: false
   },
   asker_email: {
     type: DataTypes.STRING(50),
-    allowNull: true
+    allowNull: false
   },
   reported: {
     type: DataTypes.BOOLEAN,
-    allowNull: true
+    allowNull: false
   },
   helpful: {
     type: DataTypes.INTEGER,
-    allowNull: true
+    allowNull: false
   }
 }, {
   timestamps: false
@@ -85,27 +85,27 @@ const Answer = db.define('Answer', {
   },
   body: {
     type: DataTypes.TEXT,
-    allowNull: true
+    allowNull: false
   },
   date_written: {
     type: DataTypes.BIGINT,
-    allowNull: true
+    allowNull: false
   },
   answerer_name: {
     type: DataTypes.STRING(50),
-    allowNull: true
+    allowNull: false
   },
   answerer_email: {
     type: DataTypes.STRING(50),
-    allowNull: true
+    allowNull: false
   },
   reported: {
     type: DataTypes.BOOLEAN,
-    allowNull: true
+    allowNull: false
   },
   helpful: {
     type: DataTypes.INTEGER,
-    allowNull: true
+    allowNull: false
   }
 }, {
   timestamps: false
@@ -124,7 +124,7 @@ const AnswerPhoto = db.define('AnswerPhoto', {
   },
   url: {
     type: DataTypes.STRING(256),
-    allowNull: true
+    allowNull: false
   }
 }, {
   timestamps: false
