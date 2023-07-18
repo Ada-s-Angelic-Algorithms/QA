@@ -3,9 +3,25 @@ const { Question } = require('../models');
 module.exports = {
 getAllQuestions: (req, res) => {
     const productId = req.query.product_id;
-    Question.findAll({ where: { product_id: productId } })
+    const count = parseInt(req.query.count) || 5;
+    const page = parseInt(req.query.page) || 1;
+    //offset starts at 0
+    const offset = (page - 1) * count;
+    Question.findAll({
+      where: { product_id: productId },
+      limit: count,
+      offset: offset })
       .then(questions => {
-        res.json({ results: questions });
+        const renamedQuestions = questions.map(question => {
+          // Convert instance into plain object
+          let questionObj = question.get({ plain: true });
+
+          questionObj.question_body = questionObj.body;
+          delete questionObj.body;
+
+          return questionObj;
+        });
+        res.json({ results: renamedQuestions });
       })
       .catch(err => {
         console.error(err);
@@ -14,9 +30,9 @@ getAllQuestions: (req, res) => {
   },
   markQAsHelpful: (req, res) => {
     const questionId = req.params.question_id;
-    Question.findOne({ where: { id: questionId } })
+    Question.findOne({ where: { question_id: questionId } })
       .then(question => {
-        return question.increment('helpful', { by: 1 })
+        return question.increment('question_helpfulness', { by: 1 })
       })
       .then(() => {
         res.send('Question helpfulness count incremented');
@@ -31,6 +47,8 @@ getAllQuestions: (req, res) => {
     const newQuestion = req.body;
     const date_written = new Date().getTime() //Unix Timestamp
     newQuestion.date_written = date_written;
+    // newQuestion.question_body = newQuestion.body;
+    // delete newQuestion.body;
     Question.create(newQuestion)
       .then(question => {
         res.status(201).send('Question created successfully');
@@ -43,7 +61,7 @@ getAllQuestions: (req, res) => {
 
   reportQuestion: (req, res) => {
     const questionId = req.params.question_id;
-    Question.findOne({ where: { id: questionId } })
+    Question.findOne({ where: { question_id: questionId } })
       .then(question => {
         if (!question) {
           return res.status(404).send('Question not found');

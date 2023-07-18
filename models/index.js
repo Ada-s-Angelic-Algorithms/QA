@@ -34,7 +34,7 @@ const Product = db.define('Product', {
 });
 
 const Question = db.define('Question', {
-  id: {
+  question_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
@@ -52,21 +52,23 @@ const Question = db.define('Question', {
     type: DataTypes.BIGINT,
     allowNull: false,
   },
-  asker_name: {
+  name: {
     type: DataTypes.STRING(50),
     allowNull: false
   },
-  asker_email: {
+  email: {
     type: DataTypes.STRING(50),
     allowNull: false
   },
   reported: {
     type: DataTypes.BOOLEAN,
-    allowNull: false
+    allowNull: false,
+    defaultValue: false
   },
-  helpful: {
+  question_helpfulness: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 0
   }
 }, {
   timestamps: false
@@ -87,25 +89,27 @@ const Answer = db.define('Answer', {
     type: DataTypes.TEXT,
     allowNull: false
   },
-  date_written: {
+  date: {
     type: DataTypes.BIGINT,
     allowNull: false
   },
-  answerer_name: {
+  name: {
     type: DataTypes.STRING(50),
     allowNull: false
   },
-  answerer_email: {
+  email: {
     type: DataTypes.STRING(50),
     allowNull: false
   },
   reported: {
     type: DataTypes.BOOLEAN,
-    allowNull: false
+    allowNull: false,
+    defaultValue: false
   },
-  helpful: {
+  helpfulness: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: false
   }
 }, {
   timestamps: false

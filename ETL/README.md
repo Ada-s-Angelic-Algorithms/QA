@@ -1,10 +1,10 @@
 sudo service postgresql start
 
 sudo -u postgres psql -d sdcdb
+# Make tables
+\i /home/gustavo/hackreactor/SDC/QA/ETL/PostgreSQLFile.sql
 
-\i /home/gustavo/hackreactor/SDC/QA/ETL/PostgreSQLFile.sql     make tables
-
-
+# Populate tables
 \i /home/gustavo/hackreactor/SDC/QA/ETL/PostgreSQLPopulate.sql
 
 
