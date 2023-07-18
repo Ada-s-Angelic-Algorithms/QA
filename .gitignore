@@ -4,3 +4,4 @@ questions.csv
 answers.csv
 
 node_modules/
+.env
