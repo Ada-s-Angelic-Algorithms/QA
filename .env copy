@@ -1,0 +1,5 @@
+DATABASE='sdcdb'
+USERNAME='postgres'
+PASSWORD='b'
+PORT ='3000'
+HOST='localhost'

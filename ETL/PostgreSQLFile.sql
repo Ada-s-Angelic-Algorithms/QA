@@ -49,6 +49,14 @@ ALTER TABLE "Answers" ADD FOREIGN KEY ("question_id") REFERENCES "Questions" ("q
 
 ALTER TABLE "AnswerPhotos" ADD FOREIGN KEY ("answer_id") REFERENCES "Answers" ("id") ON DELETE CASCADE;
 
+--INDEXING SECTION
+
+CREATE INDEX idx_questions_product_id ON "Questions" ("product_id");
+
+CREATE INDEX idx_answers_question_id ON "Answers" ("question_id");
+
+CREATE INDEX idx_answerphotos_answer_id ON "AnswerPhotos" ("answer_id");
+
 --NEED TO FIX THE SEQUENCING IN ORDER TO ADD TO THE TABLES
 --COALESCE HANDLES WHEN TABLE IS EMPTY -- PUT ALL THIS AFTER THE POPULATE
 -- SELECT setval(pg_get_serial_sequence('"Products"', 'id'), COALESCE((SELECT MAX(id)+1 FROM "Products"), 1), false);
