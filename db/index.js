@@ -11,6 +11,12 @@ console.log(user,pass)
 const db = new Sequelize(dbName, user, pass, {
   host: host,
   dialect: 'postgres'
+  pool: {
+    max: 5, // maximum number of connection in pool
+    min: 0, // minimum number of connection in pool
+    acquire: 30000, // maximum time, in milliseconds, that pool will try to get connection before throwing error
+    idle: 10000 // time in milliseconds that a connection can be idle before being released
+  }
 });
 
 
