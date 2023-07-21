@@ -1,0 +1,37 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 60
+      arrivalRate: 10
+scenarios:
+  - name: "Test Questions and Answers Routes"
+    flow:
+      - get:
+          url: "/qa/questions?product_id=900000"
+      - get:
+          url: "/qa/questions/3500000/answers"
+      - put:
+          url: "/qa/questions/3518901/helpful"
+      - put:
+          url: "/qa/questions/3518901/report"
+      - post:
+          url: "/qa/questions"
+          json:
+            body: "Sample Question"
+            name: "Sample User"
+            email: "sample@example.com"
+            product_id: 1000000
+      - post:
+          url: "/qa/questions/3500000/answers"
+          json:
+            body: "Sample Answer"
+            name: "Sample User"
+            email: "sample@example.com"
+      - put:
+          url: "/qa/answers/6879281/helpful"
+      - put:
+          url: "/qa/answers/6879281/report"
+  - name: "Test Products Route"
+    flow:
+      - get:
+          url: "/products/999999"

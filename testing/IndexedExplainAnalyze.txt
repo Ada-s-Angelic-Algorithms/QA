@@ -1,0 +1,150 @@
+BEGIN
+                                                            QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------
+ Update on "Products"  (cost=0.42..8.44 rows=0 width=0) (actual time=0.045..0.045 rows=0 loops=1)
+   ->  Index Scan using "Products_pkey" on "Products"  (cost=0.42..8.44 rows=1 width=10) (actual time=0.021..0.022 rows=1 loops=1)
+         Index Cond: (id = 500)
+ Planning Time: 0.044 ms
+ Execution Time: 0.060 ms
+(5 rows)
+
+                                                            QUERY PLAN
+----------------------------------------------------------------------------------------------------------------------------------
+ Delete on "Products"  (cost=0.42..8.44 rows=0 width=0) (actual time=0.011..0.011 rows=0 loops=1)
+   ->  Index Scan using "Products_pkey" on "Products"  (cost=0.42..8.44 rows=1 width=6) (actual time=0.007..0.007 rows=1 loops=1)
+         Index Cond: (id = 500)
+ Planning Time: 0.018 ms
+ Trigger for constraint Questions_product_id_fkey on Products: time=0.025 calls=1
+ Trigger for constraint Answers_question_id_fkey on Questions: time=0.031 calls=5
+ Trigger for constraint AnswerPhotos_answer_id_fkey on Answers: time=1061.344 calls=9
+ Execution Time: 1061.428 ms
+(8 rows)
+
+                                            QUERY PLAN
+--------------------------------------------------------------------------------------------------
+ Insert on "Products"  (cost=0.00..0.01 rows=0 width=0) (actual time=0.035..0.036 rows=0 loops=1)
+   ->  Result  (cost=0.00..0.01 rows=1 width=508) (actual time=0.008..0.008 rows=1 loops=1)
+ Planning Time: 0.035 ms
+ Execution Time: 0.049 ms
+(4 rows)
+
+                                                        QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..44854.96 rows=1 width=277) (actual time=44.896..46.348 rows=1 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   ->  Parallel Seq Scan on "Products"  (cost=0.00..43854.86 rows=1 width=277) (actual time=43.503..43.503 rows=0 loops=3)
+         Filter: ((category)::text = 'Test Category'::text)
+         Rows Removed by Filter: 333337
+ Planning Time: 0.040 ms
+ Execution Time: 46.360 ms
+(8 rows)
+
+                                                               QUERY PLAN
+----------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using idx_questions_product_id on "Questions"  (cost=0.43..8.59 rows=9 width=102) (actual time=0.015..0.015 rows=0 loops=1)
+   Index Cond: (product_id = 601)
+ Planning Time: 0.076 ms
+ Execution Time: 0.024 ms
+(4 rows)
+
+                                                             QUERY PLAN
+------------------------------------------------------------------------------------------------------------------------------------
+ Delete on "Questions"  (cost=0.43..8.45 rows=0 width=0) (actual time=0.019..0.020 rows=0 loops=1)
+   ->  Index Scan using "Questions_pkey" on "Questions"  (cost=0.43..8.45 rows=1 width=6) (actual time=0.011..0.012 rows=1 loops=1)
+         Index Cond: (question_id = 601)
+ Planning Time: 0.022 ms
+ Trigger for constraint Answers_question_id_fkey: time=0.017 calls=1
+ Execution Time: 0.044 ms
+(6 rows)
+
+                                            QUERY PLAN
+---------------------------------------------------------------------------------------------------
+ Insert on "Questions"  (cost=0.00..0.01 rows=0 width=0) (actual time=0.037..0.037 rows=0 loops=1)
+   ->  Result  (cost=0.00..0.01 rows=1 width=289) (actual time=0.006..0.006 rows=1 loops=1)
+ Planning Time: 0.012 ms
+ Trigger for constraint Questions_product_id_fkey: time=0.044 calls=1
+ Execution Time: 0.088 ms
+(5 rows)
+
+                                                         QUERY PLAN
+----------------------------------------------------------------------------------------------------------------------------
+ Index Scan using "Answers_pkey" on "Answers"  (cost=0.43..8.45 rows=1 width=102) (actual time=0.009..0.014 rows=1 loops=1)
+   Index Cond: (id = 500)
+ Planning Time: 0.022 ms
+ Execution Time: 0.019 ms
+(4 rows)
+
+                                                              QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using idx_answers_question_id on "Answers"  (cost=0.43..8.61 rows=10 width=102) (actual time=0.006..0.006 rows=0 loops=1)
+   Index Cond: (question_id = 500)
+ Planning Time: 0.022 ms
+ Execution Time: 0.012 ms
+(4 rows)
+
+                                                           QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------
+ Update on "Answers"  (cost=0.43..8.45 rows=0 width=0) (actual time=0.025..0.026 rows=0 loops=1)
+   ->  Index Scan using "Answers_pkey" on "Answers"  (cost=0.43..8.45 rows=1 width=7) (actual time=0.007..0.007 rows=1 loops=1)
+         Index Cond: (id = 500)
+ Planning Time: 0.019 ms
+ Execution Time: 0.034 ms
+(5 rows)
+
+                                                           QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------
+ Delete on "Answers"  (cost=0.43..8.45 rows=0 width=0) (actual time=0.011..0.011 rows=0 loops=1)
+   ->  Index Scan using "Answers_pkey" on "Answers"  (cost=0.43..8.45 rows=1 width=6) (actual time=0.006..0.006 rows=1 loops=1)
+         Index Cond: (id = 500)
+ Planning Time: 0.017 ms
+ Trigger for constraint AnswerPhotos_answer_id_fkey: time=119.486 calls=1
+ Execution Time: 119.507 ms
+(6 rows)
+
+                                           QUERY PLAN
+-------------------------------------------------------------------------------------------------
+ Insert on "Answers"  (cost=0.00..0.01 rows=0 width=0) (actual time=0.044..0.044 rows=0 loops=1)
+   ->  Result  (cost=0.00..0.01 rows=1 width=289) (actual time=0.007..0.007 rows=1 loops=1)
+ Planning Time: 0.020 ms
+ Trigger for constraint Answers_question_id_fkey: time=0.110 calls=1
+ Execution Time: 0.162 ms
+(5 rows)
+
+                                                              QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using "AnswerPhotos_pkey" on "AnswerPhotos"  (cost=0.43..8.45 rows=1 width=136) (actual time=0.011..0.012 rows=1 loops=1)
+   Index Cond: (id = 3)
+ Planning Time: 0.086 ms
+ Execution Time: 0.017 ms
+(4 rows)
+
+                                                          QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..54728.60 rows=1 width=136) (actual time=44.515..46.909 rows=0 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   ->  Parallel Seq Scan on "AnswerPhotos"  (cost=0.00..53728.50 rows=1 width=136) (actual time=43.073..43.073 rows=0 loops=3)
+         Filter: (answer_id = 3)
+         Rows Removed by Filter: 687918
+ Planning Time: 0.016 ms
+ Execution Time: 46.919 ms
+(8 rows)
+
+                                                                 QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Update on "AnswerPhotos"  (cost=0.43..8.45 rows=0 width=0) (actual time=0.063..0.063 rows=0 loops=1)
+   ->  Index Scan using "AnswerPhotos_pkey" on "AnswerPhotos"  (cost=0.43..8.45 rows=1 width=522) (actual time=0.016..0.017 rows=1 loops=1)
+         Index Cond: (id = 3)
+ Planning Time: 0.049 ms
+ Execution Time: 0.074 ms
+(5 rows)
+
+                                              QUERY PLAN
+------------------------------------------------------------------------------------------------------
+ Insert on "AnswerPhotos"  (cost=0.00..0.01 rows=0 width=0) (actual time=0.056..0.056 rows=0 loops=1)
+   ->  Result  (cost=0.00..0.01 rows=1 width=524) (actual time=0.021..0.021 rows=1 loops=1)
+ Planning Time: 0.013 ms
+ Trigger for constraint AnswerPhotos_answer_id_fkey: time=0.149 calls=1
+ Execution Time: 0.211 ms
+(5 rows)

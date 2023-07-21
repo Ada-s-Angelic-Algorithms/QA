@@ -76,3 +76,14 @@ Changed style
 oops
 I think I fixed it this time?
 empty commit messages
+
+# DEPLOYMENT THINGS:
+
+with Amazon Linux EC2 instance use yum
+
+for db instance: sudo yum update -y
+sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+sudo service postgresql start
+
+https://docs.google.com/document/d/1RZ7c61U2ZdE3f6HvR3zTQGr5N5Io0Tulb8brfC3c6P4/edit

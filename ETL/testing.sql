@@ -21,10 +21,10 @@ SELECT * FROM "Questions" WHERE "product_id" = 601;
 
 
 EXPLAIN ANALYZE
-DELETE FROM "Questions" WHERE "id" = 601;
+DELETE FROM "Questions" WHERE "question_id" = 601;
 
 EXPLAIN ANALYZE
-INSERT INTO "Questions" ("product_id", "body", "date_written", "asker_name", "asker_email", "reported", "helpful")
+INSERT INTO "Questions" ("product_id", "body", "date_written", "name", "email", "reported", "question_helpfulness")
 VALUES (601, 'Test Question Body', 123456789, 'Test Asker Name', 'testasker@email.com', false, 123);
 
 
@@ -43,7 +43,7 @@ EXPLAIN ANALYZE
 DELETE FROM "Answers" WHERE "id" = 500;
 
 EXPLAIN ANALYZE
-INSERT INTO "Answers" ("question_id", "body", "date_written", "answerer_name", "answerer_email", "reported", "helpful")
+INSERT INTO "Answers" ("question_id", "body", "date", "name", "email", "reported", "helpfulness")
 VALUES (500, 'Test Answer Body', 123456789, 'Test Answerer Name', 'testanswerer@email.com', false, 123);
 
 --AnswerPhotos
