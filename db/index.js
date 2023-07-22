@@ -10,7 +10,7 @@ console.log(user,pass)
 
 const db = new Sequelize(dbName, user, pass, {
   host: host,
-  dialect: 'postgres'
+  dialect: 'postgres',
   pool: {
     max: 5, // maximum number of connection in pool
     min: 0, // minimum number of connection in pool
